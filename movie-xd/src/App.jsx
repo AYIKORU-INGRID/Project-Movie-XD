@@ -1,24 +1,43 @@
-// components/SearchBar.jsx
-import React from 'react';
+// App.jsx
+import React, { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import MovieCard from './components/MovieCard';
 
-const SearchBar = ({ query, setQuery, onSearch }) => {
+const API_KEY = 'your_omdb_api_key';
+
+const App = () => {
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState('');
+
+  const fetchMovies = async () => {
+    if (!query) return;
+    try {
+      const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`);
+      const data = await res.json();
+      if (data.Response === 'True') {
+        setMovies(data.Search);
+        setError('');
+      } else {
+        setMovies([]);
+        setError(data.Error || 'No movies found.');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+    }
+  };
+
   return (
-    <div className="flex justify-center my-4">
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for a movie..."
-        className="px-4 py-2 border rounded-l-md w-64"
-      />
-      <button
-        onClick={onSearch}
-        className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
-      >
-        Search
-      </button>
+    <div className="p-4">
+      <SearchBar query={query} setQuery={setQuery} onSearch={fetchMovies} />
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        {movies.map((movie) => (
+          <MovieCard key={movie.imdbID} movie={movie} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default SearchBar;s
+export default App;
