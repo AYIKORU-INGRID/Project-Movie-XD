@@ -1,4 +1,4 @@
-// components/MovieCard.jsx
+// MovieCard.jsx
 import React from 'react';
 
 const MovieCard = ({ movie }) => {

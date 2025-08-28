@@ -1,4 +1,4 @@
-// components/SearchBar.jsx
+// SearchBar.jsx
 import React from 'react';
 
 const SearchBar = ({ query, setQuery, onSearch }) => {
