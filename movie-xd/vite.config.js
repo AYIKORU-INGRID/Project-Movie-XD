@@ -1,9 +1,6 @@
 import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-module.exports = {
-  darkMode: 'class',
-  // ...
-}
+import react from '@vitejs/plugin-react';
+ 
 export default defineConfig({
-  plugins: [tailwind(),],
-})
+  plugins: [react()],
+});
