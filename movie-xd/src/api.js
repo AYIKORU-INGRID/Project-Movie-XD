@@ -1,9 +1,13 @@
-const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
+const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const BASE_URL = 'https://www.omdbapi.com/';
+
+if (!API_KEY) {
+  console.warn('OMDB API key is missing. Please set VITE_OMDB_API_KEY in your .env file.');
+}
 
 export const searchMovies = async (query, page = 1) => {
   try {
-    const response = await fetch(`${BASE_URL}?s=${query}&page=${page}&apikey=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}?s=${encodeURIComponent(query)}&page=${page}&apikey=${API_KEY}`);
     const data = await response.json();
     
     if (data.Response === 'False') {
@@ -18,7 +22,7 @@ export const searchMovies = async (query, page = 1) => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}?i=${id}&apikey=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}?i=${encodeURIComponent(id)}&apikey=${API_KEY}`);
     const data = await response.json();
     
     if (data.Response === 'False') {

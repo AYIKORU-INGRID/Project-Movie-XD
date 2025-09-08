@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useMovies } from './useMovies';
-import SearchBar from './SearchBar';
-import MovieList from './MovieList';
-import MovieDetails from './MovieDetails';
-import ErrorMessage from './ErrorMessage';
-import LoadingSpinner from './LoadingSpinner';
-import Pagination from './Pagination';
+import { useMovies } from './useMovies.jsx';
+import SearchBar from './SearchBar.jsx';
+import MovieList from './MovieList.jsx';
+import MovieDetails from './MovieDetails.jsx';
+import ErrorMessage from './ErrorMessage.jsx';
+import LoadingSpinner from './LoadingSpinner.jsx';
+import Pagination from './Pagination.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,7 +40,7 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Movie Database</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Movie-XD</h1>
           <p className="mt-1 text-gray-600">Search and explore your favorite movies</p>
         </div>
       </header>

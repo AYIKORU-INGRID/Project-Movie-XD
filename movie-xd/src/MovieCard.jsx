@@ -9,17 +9,12 @@ const MovieCard = ({ movie, onClick }) => {
       onClick={() => onClick(imdbID)}
     >
       <div className="aspect-w-2 aspect-h-3">
-        {Poster !== 'N/A' ? (
-          <img 
-            src={Poster} 
-            alt={Title} 
-            className="w-full h-64 object-cover"
-          />
-        ) : (
-          <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-500">No Image</span>
-          </div>
-        )}
+        <img
+          src={Poster !== 'N/A' ? Poster : '/placeholder.png'}
+          alt={Title}
+          className="w-full h-64 object-cover"
+          onError={e => { e.target.onerror = null; e.target.src = '/placeholder.png'; }}
+        />
       </div>
       <div className="p-4">
         <h3 className="font-bold text-lg truncate">{Title}</h3>
