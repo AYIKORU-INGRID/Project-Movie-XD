@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getTrailerId } from './getTrailerId';
 
 const MovieDetails = ({ movie, onClose }) => {
+  const [trailerId, setTrailerId] = useState(null);
+  const [showTrailer, setShowTrailer] = useState(false);
+
+  useEffect(() => {
+    async function fetchTrailer() {
+      if (movie?.Title && movie?.Year) {
+        const id = await getTrailerId(movie.Title, movie.Year);
+        setTrailerId(id);
+      }
+    }
+    fetchTrailer();
+    setShowTrailer(false); // Reset trailer view when movie changes
+  }, [movie]);
+
   if (!movie) return null;
 
   const {
@@ -39,14 +54,15 @@ const MovieDetails = ({ movie, onClose }) => {
               &times;
             </button>
           </div>
-          
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3">
               {Poster !== 'N/A' ? (
                 <img 
                   src={Poster} 
                   alt={Title} 
-                  className="w-full h-auto rounded-lg shadow-md"
+                  className="w-full h-auto rounded-lg shadow-md cursor-pointer"
+                  onClick={() => setShowTrailer(trailerId ? !showTrailer : false)}
+                  title={trailerId ? 'Tap to view trailer' : 'No trailer available'}
                 />
               ) : (
                 <div className="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg">
@@ -54,7 +70,6 @@ const MovieDetails = ({ movie, onClose }) => {
                 </div>
               )}
             </div>
-            
             <div className="md:w-2/3">
               <div className="mb-4">
                 <h3 className="text-xl font-semibold mb-2">Plot</h3>
@@ -122,16 +137,15 @@ const MovieDetails = ({ movie, onClose }) => {
               </div>
             </div>
           </div>
-
           {/* Trailer Section */}
-          <div className="mt-6">
-            <h2 className="text-xl font-bold mb-2">Trailer</h2>
-            {movie.trailerId ? (
+          {showTrailer && trailerId && (
+            <div className="mt-6">
+              <h2 className="text-xl font-bold mb-2">Trailer</h2>
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
                   width="100%"
                   height="315"
-                  src={`https://www.youtube.com/embed/${movie.trailerId}`}
+                  src={`https://www.youtube.com/embed/${trailerId}`}
                   title="YouTube trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -139,10 +153,8 @@ const MovieDetails = ({ movie, onClose }) => {
                   className="rounded-lg shadow-lg"
                 ></iframe>
               </div>
-            ) : (
-              <div className="text-gray-500 italic">Trailer not available</div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

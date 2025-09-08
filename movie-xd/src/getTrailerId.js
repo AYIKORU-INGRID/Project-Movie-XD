@@ -4,10 +4,10 @@
  * Fetches the YouTube trailer video ID for a given movie title and year.
  * @param {string} title - Movie title
  * @param {string} year - Movie year
- * @param {string} apiKey - YouTube Data API v3 key
  * @returns {Promise<string|null>} - Trailer video ID or null if not found
  */
-export async function getTrailerId(title, year, apiKey) {
+export async function getTrailerId(title, year) {
+  const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
   const query = encodeURIComponent(`${title} ${year} official trailer`);
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&q=${query}&key=${apiKey}`;
 
