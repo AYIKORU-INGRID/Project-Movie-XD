@@ -122,6 +122,27 @@ const MovieDetails = ({ movie, onClose }) => {
               </div>
             </div>
           </div>
+
+          {/* Trailer Section */}
+          <div className="mt-6">
+            <h2 className="text-xl font-bold mb-2">Trailer</h2>
+            {movie.trailerId ? (
+              <div className="aspect-w-16 aspect-h-9">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${movie.trailerId}`}
+                  title="YouTube trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg shadow-lg"
+                ></iframe>
+              </div>
+            ) : (
+              <div className="text-gray-500 italic">Trailer not available</div>
+            )}
+          </div>
         </div>
       </div>
     </div>
