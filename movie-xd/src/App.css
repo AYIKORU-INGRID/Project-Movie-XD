@@ -1,3 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Improved App styles for Movie-XD */
+
+body {
+  @apply bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen;
+}
+
+.header {
+  @apply bg-white shadow-lg rounded-b-xl mb-6;
+}
+
+.footer {
+  @apply bg-white border-t mt-12 py-6 text-center text-gray-500 text-sm rounded-t-xl shadow;
+}
+
+.movie-card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col items-center p-4;
+}
+
+.movie-card img {
+  @apply rounded-lg mb-2 w-full h-64 object-cover;
+}
+
+.movie-card-title {
+  @apply text-lg font-semibold text-gray-800 mb-1 text-center;
+}
+
+.movie-card-year {
+  @apply text-sm text-gray-500 mb-2 text-center;
+}
+
+.search-bar {
+  @apply flex items-center gap-2 mb-6;
+}
+
+.pagination {
+  @apply flex justify-center items-center gap-2 mt-8;
+}
+
+.loading-spinner {
+  @apply flex justify-center items-center py-12;
+}
+
+.error-message {
+  @apply text-red-500 text-center font-semibold my-4;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
