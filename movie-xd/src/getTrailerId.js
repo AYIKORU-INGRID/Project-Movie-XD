@@ -8,6 +8,10 @@
  */
 export async function getTrailerId(title, year) {
   const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  if (!apiKey) {
+    console.error('YouTube API key is missing. Please set VITE_YOUTUBE_API_KEY in your .env file and restart the dev server.');
+    return null;
+  }
   const query = encodeURIComponent(`${title} ${year} official trailer`);
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&q=${query}&key=${apiKey}`;
 

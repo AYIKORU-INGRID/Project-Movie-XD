@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieCard = ({ movie, onClick }) => {
+const MovieCard = ({ movie, onClick, onAddFavorite, isFavorite }) => {
   const { Title, Year, Poster, imdbID } = movie;
   
   return (
@@ -26,6 +26,12 @@ const MovieCard = ({ movie, onClick }) => {
       <div className="p-4 bg-white bg-opacity-90 rounded-b-xl">
         <h3 className="font-extrabold text-xl truncate text-pink-700 drop-shadow-sm mb-1">{Title}</h3>
         <p className="text-yellow-700 font-semibold text-md">{Year}</p>
+        <button
+          className={`mt-2 px-3 py-1 rounded-lg text-sm font-bold shadow transition ${isFavorite ? 'bg-yellow-400 text-white' : 'bg-pink-400 text-white hover:bg-pink-600'}`}
+          onClick={e => { e.stopPropagation(); onAddFavorite(movie); }}
+        >
+          {isFavorite ? 'Favorited' : 'Add to Favorites'}
+        </button>
       </div>
     </div>
   );
