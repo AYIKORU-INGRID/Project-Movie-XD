@@ -6,7 +6,7 @@ import MovieDetails from './MovieDetails.jsx';
 import ErrorMessage from './ErrorMessage.jsx';
 import LoadingSpinner from './LoadingSpinner.jsx';
 import Pagination from './Pagination.jsx';
-import './styles.css';
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
