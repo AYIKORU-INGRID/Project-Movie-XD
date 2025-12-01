@@ -1,0 +1,36 @@
+.root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+.dark #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #d946efaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #a78bfa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #a78bfa;
+}
+.dark .read-the-docs {
+  color: #f472b6;
+}
